@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using CIS174FinalProject.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add DbContext with SQL Server
+builder.Services.AddDbContext<LibraryContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryContext")));
 
 // Add session services
 builder.Services.AddSession(options =>
