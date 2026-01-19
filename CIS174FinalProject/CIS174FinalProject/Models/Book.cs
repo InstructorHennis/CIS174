@@ -6,6 +6,8 @@ namespace CIS174FinalProject.Models;
 public class Book
 {
     [Key]
+    [Required]
+    [MaxLength(20)]
     public string ISBN { get; set; } = string.Empty;
 
     [Required]
