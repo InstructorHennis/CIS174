@@ -28,4 +28,3 @@ jobs:
     
     - name: Test
       run: dotnet test Week1/CIS174FinalProject/CIS174FinalProject.csproj --no-build --configuration Release --verbosity normal
-      continue-on-error: true
