@@ -7,7 +7,7 @@ public class Book
 {
     [Key]
     [Required]
-    [MaxLength(20)]
+    [MaxLength(17)]
     public string ISBN { get; set; } = string.Empty;
 
     [Required]

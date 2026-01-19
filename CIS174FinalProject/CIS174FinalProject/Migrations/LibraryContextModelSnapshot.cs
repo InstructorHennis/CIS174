@@ -109,8 +109,8 @@ namespace CIS174FinalProject.Migrations
             modelBuilder.Entity("CIS174FinalProject.Models.Book", b =>
                 {
                     b.Property<string>("ISBN")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(17)
+                        .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
