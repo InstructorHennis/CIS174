@@ -7,19 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Add DbContext
-var connectionString = builder.Configuration.GetConnectionString("LibraryContext");
-if (builder.Environment.IsDevelopment())
-{
-    // Use SQLite for development environment
-    builder.Services.AddDbContext<LibraryContext>(options =>
-        options.UseSqlite("Data Source=library.db"));
-}
-else
-{
-    // Use SQL Server for production
-    builder.Services.AddDbContext<LibraryContext>(options =>
-        options.UseSqlServer(connectionString));
-}
+var connectionString = builder.Configuration.GetConnectionString("LibraryContext") 
+    ?? throw new InvalidOperationException("Connection string 'LibraryContext' not found.");
+builder.Services.AddDbContext<LibraryContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Add session services
 builder.Services.AddSession(options =>
