@@ -1,26 +1,16 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using CIS174FinalProject.Models;
+using CIS174FinalProject.Filters;
 
 namespace CIS174FinalProject.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly LibraryContext _context;
-
-    public HomeController(LibraryContext context)
-    {
-        _context = context;
-    }
-
+    [PopulateBooksFilter]
     public IActionResult Index()
     {
-        var books = _context.Books
-            .Include(b => b.Author)
-            .Include(b => b.Genre)
-            .ToList();
-        return View(books);
+        return View();
     }
 
     public IActionResult Privacy()

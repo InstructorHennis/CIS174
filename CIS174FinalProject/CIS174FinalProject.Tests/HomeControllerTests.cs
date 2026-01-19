@@ -12,13 +12,7 @@ public class HomeControllerTests
     public void Index_ReturnsViewResult()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<LibraryContext>()
-            .UseInMemoryDatabase(databaseName: "TestLibrary")
-            .Options;
-
-        // Act
-        using var context = new LibraryContext(options);
-        var controller = new HomeController(context);
+        var controller = new HomeController();
 
         // Act
         var result = controller.Index();
