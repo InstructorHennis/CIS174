@@ -16,16 +16,13 @@ public class PopulateBooksFilterAttribute : ActionFilterAttribute
         var controller = context.Controller as Controller;
         if (controller != null)
         {
-            var dbContext = context.HttpContext.RequestServices.GetService<LibraryContext>();
-            if (dbContext != null)
-            {
-                var books = dbContext.Books
-                    .Include(b => b.Author)
-                    .Include(b => b.Genre)
-                    .ToList();
-                
-                controller.ViewBag.Books = books;
-            }
+            var dbContext = context.HttpContext.RequestServices.GetRequiredService<LibraryContext>();
+            var books = dbContext.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .ToList();
+            
+            controller.ViewBag.Books = books;
         }
         
         base.OnActionExecuting(context);
