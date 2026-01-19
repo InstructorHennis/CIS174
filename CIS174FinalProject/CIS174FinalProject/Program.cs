@@ -6,9 +6,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add DbContext with SQL Server
-builder.Services.AddDbContext<LibraryContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryContext")));
+// Add DbContext
+var connectionString = builder.Configuration.GetConnectionString("LibraryContext");
+if (builder.Environment.IsDevelopment())
+{
+    // Use SQLite for development environment
+    builder.Services.AddDbContext<LibraryContext>(options =>
+        options.UseSqlite("Data Source=library.db"));
+}
+else
+{
+    // Use SQL Server for production
+    builder.Services.AddDbContext<LibraryContext>(options =>
+        options.UseSqlServer(connectionString));
+}
 
 // Add session services
 builder.Services.AddSession(options =>
@@ -19,6 +30,13 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+// Ensure database is created and seeded
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<LibraryContext>();
+    context.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
