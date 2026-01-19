@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Add DbContext
-var connectionString = builder.Configuration.GetConnectionString("LibraryContext");
+var connectionString = builder.Configuration.GetConnectionString("LibraryContext") 
+    ?? throw new InvalidOperationException("Connection string 'LibraryContext' not found.");
 builder.Services.AddDbContext<LibraryContext>(options =>
     options.UseSqlServer(connectionString));
 
