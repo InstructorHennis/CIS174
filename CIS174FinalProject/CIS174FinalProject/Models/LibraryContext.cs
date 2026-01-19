@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CIS174FinalProject.Models;
 
-public class LibraryContext : DbContext
+public class LibraryContext : IdentityDbContext<User>
 {
     public LibraryContext(DbContextOptions<LibraryContext> options)
         : base(options)
