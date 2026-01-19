@@ -19,7 +19,7 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 
 **Implementation Notes:**
 - ✅ DONE: Default MVC routing pattern configured (`{controller=Home}/{action=Index}/{id?}`)
-- ✅ DONE: Route templates working for all controllers (Home, Book, Author)
+- ✅ DONE: Route templates working for implemented controllers (Home, Book, Author)
 - TODO: Create Web API controllers with attribute routing (if needed for full points)
 
 **Files Modified:**
@@ -122,7 +122,7 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 - ⚠️ NOTE: Direct DbContext usage in controllers instead of separate service layer - works but could be refactored for better architecture
 
 **Files Implemented:**
-- ✅ `/CIS174FinalProject/Data/` or `/Models/LibraryContext.cs` - DbContext with seed data
+- ✅ `/CIS174FinalProject/Models/LibraryContext.cs` - DbContext with seed data
 - ✅ `/CIS174FinalProject/Models/Book.cs` - Entity with navigation properties
 - ✅ `/CIS174FinalProject/Models/Author.cs` - Entity with navigation properties
 - ✅ `/CIS174FinalProject/Models/Genre.cs` - Entity model
@@ -359,7 +359,7 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 | 9. Error Handling | 10 | ⚠️ Partial | 40% |
 | 10. Unit Testing | 20 | ⚠️ Partial | 30% |
 | 11. Azure Deployment | 20 | ❌ Not Started | 0% |
-| **TOTAL** | **150** | | **~49%** |
+| **TOTAL** | **150** | | **48%** |
 
 ---
 
