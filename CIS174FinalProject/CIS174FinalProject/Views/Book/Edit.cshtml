@@ -39,7 +39,10 @@
                 <select asp-for="AuthorId" class="form-select" asp-items="ViewBag.Authors">
                     <option value="">-- Select Author --</option>
                 </select>
-                <a asp-controller="Author" asp-action="Create" asp-route-returnUrl="@Url.Action(ViewBag.IsEdit ? "Edit" : "Create", "Book", new { id = Model.ISBN })" class="btn btn-secondary">Add Author</a>
+                @{
+                    var returnUrl = ViewBag.IsEdit ? Url.Action("Edit", "Book", new { id = Model.ISBN }) : Url.Action("Create", "Book");
+                }
+                <a asp-controller="Author" asp-action="Create" asp-route-returnUrl="@returnUrl" class="btn btn-secondary">Add Author</a>
             </div>
             <span asp-validation-for="AuthorId" class="text-danger"></span>
         </div>

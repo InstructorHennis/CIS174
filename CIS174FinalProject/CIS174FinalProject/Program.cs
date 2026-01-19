@@ -6,24 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add DbContext - Use SQLite for local development, SQL Server for production
+// Add DbContext
 var connectionString = builder.Configuration.GetConnectionString("LibraryContext");
-if (builder.Environment.IsDevelopment() && !string.IsNullOrEmpty(connectionString) && connectionString.Contains("Trusted_Connection"))
+if (builder.Environment.IsDevelopment())
 {
     // Use SQLite for development environment
     builder.Services.AddDbContext<LibraryContext>(options =>
         options.UseSqlite("Data Source=library.db"));
 }
-else if (!string.IsNullOrEmpty(connectionString))
-{
-    builder.Services.AddDbContext<LibraryContext>(options =>
-        options.UseSqlServer(connectionString));
-}
 else
 {
-    // Fallback to SQLite if no connection string is configured
+    // Use SQL Server for production
     builder.Services.AddDbContext<LibraryContext>(options =>
-        options.UseSqlite("Data Source=library.db"));
+        options.UseSqlServer(connectionString));
 }
 
 // Add session services
