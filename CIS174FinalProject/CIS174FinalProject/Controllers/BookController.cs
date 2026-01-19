@@ -19,7 +19,7 @@ public class BookController : Controller
     {
         PopulateDropdowns();
         ViewBag.IsEdit = false;
-        return View("Edit", new Book());
+        return View("Edit", new Book() { Year = DateTime.Now.Year });
     }
 
     // POST: Book/Create
