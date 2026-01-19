@@ -67,5 +67,5 @@ This repository is for CIS174 Advanced C# Programming coursework, focusing on AS
 
 ## Additional Notes
 - When generating code examples, reference specific Murach's ASP.NET Core MVC chapters or patterns when applicable
-- Ensure all code is compatible with the latest stable .NET version unless otherwise specified
+- Ensure all code is compatible with .NET 8 unless otherwise specified
 - Follow security best practices, especially for authentication and authorization features
