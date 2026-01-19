@@ -17,8 +17,7 @@ public class BookController : Controller
     // GET: Book/Create
     public IActionResult Create()
     {
-        ViewBag.Authors = new SelectList(_context.Authors.OrderBy(a => a.LastName), "Id", "LastName");
-        ViewBag.Genres = new SelectList(_context.Genres.OrderBy(g => g.Description), "Id", "Description");
+        PopulateDropdowns();
         ViewBag.IsEdit = false;
         return View("Edit", new Book());
     }
@@ -35,8 +34,7 @@ public class BookController : Controller
             return RedirectToAction("Index", "Home");
         }
         
-        ViewBag.Authors = new SelectList(_context.Authors.OrderBy(a => a.LastName), "Id", "LastName", book.AuthorId);
-        ViewBag.Genres = new SelectList(_context.Genres.OrderBy(g => g.Description), "Id", "Description", book.GenreId);
+        PopulateDropdowns(book.AuthorId, book.GenreId);
         ViewBag.IsEdit = false;
         return View("Edit", book);
     }
@@ -55,8 +53,7 @@ public class BookController : Controller
             return NotFound();
         }
 
-        ViewBag.Authors = new SelectList(_context.Authors.OrderBy(a => a.LastName), "Id", "LastName", book.AuthorId);
-        ViewBag.Genres = new SelectList(_context.Genres.OrderBy(g => g.Description), "Id", "Description", book.GenreId);
+        PopulateDropdowns(book.AuthorId, book.GenreId);
         ViewBag.IsEdit = true;
         return View(book);
     }
@@ -92,8 +89,7 @@ public class BookController : Controller
             return RedirectToAction("Index", "Home");
         }
         
-        ViewBag.Authors = new SelectList(_context.Authors.OrderBy(a => a.LastName), "Id", "LastName", book.AuthorId);
-        ViewBag.Genres = new SelectList(_context.Genres.OrderBy(g => g.Description), "Id", "Description", book.GenreId);
+        PopulateDropdowns(book.AuthorId, book.GenreId);
         ViewBag.IsEdit = true;
         return View(book);
     }
@@ -137,5 +133,20 @@ public class BookController : Controller
     private bool BookExists(string isbn)
     {
         return _context.Books.Any(e => e.ISBN == isbn);
+    }
+
+    private void PopulateDropdowns(int? selectedAuthorId = null, int? selectedGenreId = null)
+    {
+        var authors = _context.Authors
+            .OrderBy(a => a.LastName)
+            .Select(a => new
+            {
+                Id = a.Id,
+                FullName = a.FirstName + " " + a.LastName
+            })
+            .ToList();
+
+        ViewBag.Authors = new SelectList(authors, "Id", "FullName", selectedAuthorId);
+        ViewBag.Genres = new SelectList(_context.Genres.OrderBy(g => g.Description), "Id", "Description", selectedGenreId);
     }
 }
