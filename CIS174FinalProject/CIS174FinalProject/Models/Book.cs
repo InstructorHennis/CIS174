@@ -13,6 +13,7 @@ public class Book
     public int AuthorId { get; set; }
 
     [Required]
+    [MaxLength(200)]
     public string Title { get; set; } = string.Empty;
 
     [Required]

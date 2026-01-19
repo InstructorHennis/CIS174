@@ -8,6 +8,7 @@ public class Genre
     public int Id { get; set; }
 
     [Required]
+    [MaxLength(100)]
     public string Description { get; set; } = string.Empty;
 
     // Navigation property
