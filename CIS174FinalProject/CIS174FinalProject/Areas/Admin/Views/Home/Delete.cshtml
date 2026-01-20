@@ -26,6 +26,6 @@
     <form asp-action="Delete" method="post" class="mt-3">
         <input type="hidden" asp-for="ISBN" />
         <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+        <a asp-controller="Home" asp-action="Index" asp-area="Admin" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

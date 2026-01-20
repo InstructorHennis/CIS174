@@ -94,42 +94,6 @@ public class BookController : Controller
         return View(book);
     }
 
-    // GET: Book/Delete/5
-    public IActionResult Delete(string id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var book = _context.Books
-            .Include(b => b.Author)
-            .Include(b => b.Genre)
-            .FirstOrDefault(b => b.ISBN == id);
-        
-        if (book == null)
-        {
-            return NotFound();
-        }
-
-        return View(book);
-    }
-
-    // POST: Book/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public IActionResult DeleteConfirmed(string id)
-    {
-        var book = _context.Books.Find(id);
-        if (book != null)
-        {
-            _context.Books.Remove(book);
-            _context.SaveChanges();
-        }
-        
-        return RedirectToAction("Index", "Home");
-    }
-
     private bool BookExists(string isbn)
     {
         return _context.Books.Any(e => e.ISBN == isbn);
