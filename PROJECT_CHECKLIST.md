@@ -156,50 +156,60 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 ---
 
 ### 6. User Accounts and Identity (10 points)
-**Status:** Not Implemented ❌
+**Status:** Implemented ✅
 
 **Requirements:**
-- [ ] Implement ASP.NET Core Identity
-- [ ] Create user registration functionality
-- [ ] Create user login functionality
-- [ ] Configure Identity services
+- [x] Implement ASP.NET Core Identity
+- [x] Create user registration functionality
+- [x] Create user login functionality
+- [x] Configure Identity services
 
 **Implementation Notes:**
-- TODO: Install Microsoft.AspNetCore.Identity.EntityFrameworkCore
-- TODO: Update DbContext to inherit from IdentityDbContext
-- TODO: Configure Identity in Program.cs
-- TODO: Create Account controller with Register and Login actions
-- TODO: Create registration and login views
-- TODO: Add user management functionality
+- ✅ DONE: Microsoft.AspNetCore.Identity.EntityFrameworkCore installed
+- ✅ DONE: LibraryContext updated to inherit from IdentityDbContext<User>
+- ✅ DONE: Identity configured in Program.cs with password requirements
+- ✅ DONE: AccountController created with Register, Login, and Logout actions
+- ✅ DONE: Registration and login views created in Views/Account/
+- ✅ DONE: User model created extending IdentityUser
+- ✅ DONE: ViewModels created (RegisterViewModel, LoginViewModel)
 
-**Files to Modify/Create:**
-- `/CIS174FinalProject/Data/ApplicationDbContext.cs` - Update to IdentityDbContext
-- `/CIS174FinalProject/Controllers/AccountController.cs` - Create account management
-- `/CIS174FinalProject/Models/[AccountViewModels].cs` - Create ViewModels for registration/login
-- `/CIS174FinalProject/Views/Account/` - Create registration and login views
-- `/CIS174FinalProject/Program.cs` - Configure Identity services
+**Files Implemented:**
+- ✅ `/CIS174FinalProject/Models/LibraryContext.cs` - Updated to IdentityDbContext<User>
+- ✅ `/CIS174FinalProject/Controllers/AccountController.cs` - Complete account management
+- ✅ `/CIS174FinalProject/Models/User.cs` - User model extending IdentityUser
+- ✅ `/CIS174FinalProject/Models/RegisterViewModel.cs` - Registration form model
+- ✅ `/CIS174FinalProject/Models/LoginViewModel.cs` - Login form model
+- ✅ `/CIS174FinalProject/Views/Account/Register.cshtml` - Registration view
+- ✅ `/CIS174FinalProject/Views/Account/Login.cshtml` - Login view
+- ✅ `/CIS174FinalProject/Program.cs` - Identity services configured (lines 16-27, 61-62)
 
 ---
 
 ### 7. Authorization (10 points)
-**Status:** Not Implemented ❌
+**Status:** Partially Implemented ⚠️
 
 **Requirements:**
 - [ ] Implement authorization to restrict access to parts of the application
 - [ ] Use [Authorize] attribute on controllers/actions
-- [ ] Show/hide Razor elements based on authorization
+- [x] Show/hide Razor elements based on authorization
 - [ ] Implement role-based or policy-based authorization
 
 **Implementation Notes:**
-- TODO: Apply [Authorize] attributes to protected controllers/actions
-- TODO: Use @if (User.Identity.IsAuthenticated) in views
-- TODO: Create different user roles if needed
+- ✅ DONE: UseAuthentication() and UseAuthorization() middleware configured in Program.cs
+- ✅ DONE: Conditional UI elements in _Layout.cshtml based on User.Identity.IsAuthenticated
+  - Shows "Hello, [Username]" and "Logout" when authenticated
+  - Shows "Register" and "Login" when not authenticated
+- TODO: Apply [Authorize] attributes to protected controllers/actions (BookController, AuthorController)
+- TODO: Consider creating user roles if needed (Admin, User)
 - TODO: Implement authorization policies if needed
 
-**Files to Modify/Create:**
-- `/CIS174FinalProject/Controllers/` - Add [Authorize] attributes
-- `/CIS174FinalProject/Views/Shared/_Layout.cshtml` - Add conditional UI elements
-- `/CIS174FinalProject/Program.cs` - Configure authorization policies if needed
+**Files Implemented:**
+- ✅ `/CIS174FinalProject/Views/Shared/_Layout.cshtml` - Conditional UI based on authentication (lines 31-51)
+- ✅ `/CIS174FinalProject/Program.cs` - Authentication and authorization middleware (lines 61-62)
+
+**Files to Modify:**
+- `/CIS174FinalProject/Controllers/BookController.cs` - Add [Authorize] to Create, Edit, Delete actions
+- `/CIS174FinalProject/Controllers/AuthorController.cs` - Add [Authorize] to Create action
 
 ---
 
@@ -268,9 +278,11 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
   - Author model properties
   - Genre model properties
   - HomeController basic functionality
+  - AccountController registration and login functionality
 - ✅ DONE: In-memory database used for context testing
 - ✅ DONE: AAA pattern followed in all tests
-- TODO: Create tests for controller CRUD operations
+- TODO: Create tests for BookController CRUD operations
+- TODO: Create tests for AuthorController Create operation
 - TODO: Add mocking framework (Moq) for dependency injection
 - TODO: Achieve 100% coverage on business logic
 - TODO: Test validation scenarios
@@ -279,6 +291,7 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 - ✅ `/CIS174FinalProject.Tests/CIS174FinalProject.Tests.csproj` - Test project with MSTest
 - ✅ `/CIS174FinalProject.Tests/LibraryContextTests.cs` - Context and model tests (5 tests)
 - ✅ `/CIS174FinalProject.Tests/HomeControllerTests.cs` - Controller tests
+- ✅ `/CIS174FinalProject.Tests/AccountControllerTests.cs` - Account controller tests
 - ✅ `/CIS174FinalProject.Tests/MSTestSettings.cs` - Test configuration
 
 **Files to Create:**
@@ -318,11 +331,11 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 3. ✅ Implement CRUD operations for Books and Create for Authors
 4. ⚠️ Add unit tests for models and context (basic tests done)
 
-### Phase 2: Authentication and Authorization (20 points) - ❌ NOT STARTED
-1. ❌ Implement ASP.NET Core Identity
-2. ❌ Create registration and login functionality
-3. ❌ Add authorization to protect resources
-4. ❌ Update UI based on authentication state
+### Phase 2: Authentication and Authorization (20 points) - ✅ MOSTLY COMPLETE
+1. ✅ Implement ASP.NET Core Identity
+2. ✅ Create registration and login functionality
+3. ⚠️ Add authorization to protect resources (UI done, [Authorize] attributes not yet applied)
+4. ✅ Update UI based on authentication state
 
 ### Phase 3: Forms and User Experience (40 points) - ✅ MOSTLY COMPLETE
 1. ✅ Create forms with Tag Helpers
@@ -330,10 +343,10 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 3. ⚠️ Add custom routing (MVC done, API routing not yet implemented)
 4. ⚠️ Implement state management (configured but not actively used)
 
-### Phase 4: Code Quality and Deployment (40 points) - ❌ MOSTLY NOT STARTED
+### Phase 4: Code Quality and Deployment (40 points) - ⚠️ PARTIALLY STARTED
 1. ❌ Implement MVC filters to reduce redundancy
 2. ⚠️ Enhance error handling with custom views (basic error handling exists)
-3. ⚠️ Complete unit test coverage (basic tests exist)
+3. ⚠️ Complete unit test coverage (basic tests exist, AccountController tests added)
 4. ❌ Deploy to Azure
 
 ### Phase 5: Final Testing and Verification (20 points) - ❌ NOT STARTED
@@ -347,19 +360,19 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
 ## Current Status Summary
 
 | Requirement | Points | Status | Completion % |
-|-------------|--------|--------|--------------|
+|-------------|--------|-------------|--------------|
 | 1. Routing | 10 | ⚠️ Partial | 70% |
 | 2. Binding & Validation | 20 | ✅ Complete | 100% |
 | 3. Tag Helpers | 10 | ✅ Complete | 100% |
 | 4. EF Core & Database | 20 | ✅ Complete | 100% |
 | 5. MVC Filters | 10 | ❌ Not Started | 0% |
-| 6. Identity | 10 | ❌ Not Started | 0% |
-| 7. Authorization | 10 | ❌ Not Started | 0% |
+| 6. Identity | 10 | ✅ Complete | 100% |
+| 7. Authorization | 10 | ⚠️ Partial | 60% |
 | 8. State Management | 10 | ⚠️ Partial | 50% |
 | 9. Error Handling | 10 | ⚠️ Partial | 40% |
-| 10. Unit Testing | 20 | ⚠️ Partial | 30% |
+| 10. Unit Testing | 20 | ⚠️ Partial | 40% |
 | 11. Azure Deployment | 20 | ❌ Not Started | 0% |
-| **TOTAL** | **150** | | **48%** |
+| **TOTAL** | **150** | | **62%** |
 
 ---
 
@@ -381,23 +394,25 @@ This checklist tracks the implementation of all requirements for the CIS174 Adva
   - Client-side and server-side validation
   - Tag Helpers throughout
   - Session services configured (not yet actively used)
-- Current authentication: None (needs to be implemented)
-- Current authorization: None (needs to be implemented)
+  - **ASP.NET Core Identity fully implemented**
+  - **User registration and login functionality**
+  - **Authentication-based UI rendering in navigation**
+- Current authentication: **Fully Implemented** ✅ (Registration, Login, Logout)
+- Current authorization: **Partially Implemented** ⚠️ (Middleware configured, UI conditional rendering done, [Authorize] attributes not yet applied)
 
 ---
 
 ## Next Actions (Priority Order)
-1. **Implement MVC Filters** (10 points) - Remove code redundancy from controllers
-2. **Implement ASP.NET Core Identity** (10 points) - User registration and login
-3. **Implement Authorization** (10 points) - Protect resources with [Authorize] attribute
-4. **Complete State Management** (5 points remaining) - Actually use session state in application
-5. **Add API Controller with Attribute Routing** (3 points remaining) - Complete routing requirements
-6. **Enhance Unit Testing** (14 points remaining) - Add controller tests, achieve 100% coverage
-7. **Enhance Error Handling** (6 points remaining) - Add status code pages, improve error views
-8. **Azure Deployment** (20 points) - Deploy application to Azure with SQL Database
+1. **Complete Authorization** (4 points remaining) - Apply [Authorize] attributes to BookController and AuthorController
+2. **Implement MVC Filters** (10 points) - Remove code redundancy from controllers
+3. **Complete State Management** (5 points remaining) - Actually use session state in application (e.g., recently viewed books)
+4. **Add API Controller with Attribute Routing** (3 points remaining) - Complete routing requirements
+5. **Enhance Unit Testing** (12 points remaining) - Add BookController and AuthorController tests, achieve better coverage
+6. **Enhance Error Handling** (6 points remaining) - Add status code pages, improve error views
+7. **Azure Deployment** (20 points) - Deploy application to Azure with SQL Database
 
-**Total Remaining Points:** ~76 out of 150
+**Total Remaining Points:** ~60 out of 150
 
 ---
 
-**Last Updated:** 2026-01-19 (Updated to reflect actual implementation status)
+**Last Updated:** 2026-01-20 (Updated to reflect authentication/authorization implementation)
